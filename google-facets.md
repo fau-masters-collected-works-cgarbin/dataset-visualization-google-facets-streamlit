@@ -1,4 +1,3 @@
 # Google facets
 
-If you haven't done so yet, review the [dataset preprocessing step](./dataset-preprocessing.md)
-step.
+If you haven't done so yet, review the details of [dataset we are using](./dataset.md).

@@ -1,0 +1,4 @@
+# Specify versions with ~= to allow security fixes
+
+pandas~=1.1
+# Pandas also installs NumPy - no need to specify it separately

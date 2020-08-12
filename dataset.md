@@ -30,13 +30,12 @@ the training of the test set.
 ## Retrieving the dataset
 
 The dataset is available [in this NIH site](https://nihcc.app.box.com/v/ChestXray-NIHCC). It may be
-updated from time to time. To make this experiment reproducible, we stored a copy of the current
+updated from time to time. To make this experiment reproducible, we store a copy of the current
 version with this repository. See details of the local copy [here](./data/README.md).
 
 ## Preprocessing the dataset
 
-The [ChestX-ray8 (a.k.a. ChestX-ray14) dataset](https://arxiv.org/abs/1705.02315) dataset needs to
-be preprocessed to be visualized:
+The dataset needs to be preprocessed to be visualized:
 
 1. The diseases are stored in one column, separated by |. We will split them into separate columns.
    Theere will be one column for each diseases, with true/false indicating presence/absence (i.e.

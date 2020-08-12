@@ -18,6 +18,21 @@ questions such as:
 - Is the disease distribution the same across genres and ages in the training and test sets?
 - What diseases coccur in the same image?
 
+## The quick how-to guide
+
+These are the quick instructions to run the visualization. The details are explained in each
+section.
+
+- Install Python 3
+- Clone this repository
+- Go into the repository directory
+- Create a Python [environment](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/#creating-a-virtual-environment):
+  `python3 -m venv env`
+- Activate the environmnet: `source env/bin/activate` (Linux/Mac) or `.\env\Scripts\activate` (Windows)
+- Install the Python packages: `pip install -r requirements.txt`
+
+TODO: add steps for each visualization
+
 ## Google Facets
 
 [Google Facets](https://pair-code.github.io/facets/) was created to explore data with machine

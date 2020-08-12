@@ -31,7 +31,7 @@ the training of the test set.
 
 The dataset is available [in this NIH site](https://nihcc.app.box.com/v/ChestXray-NIHCC). It may be
 updated from time to time. To make this experiment reproducible, we stored a copy of the current
-version with this repository.
+version with this repository. See details of the local copy [here](./data/README.md).
 
 ## Preprocessing the dataset
 

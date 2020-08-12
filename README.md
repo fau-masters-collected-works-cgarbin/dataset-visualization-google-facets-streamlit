@@ -1,4 +1,4 @@
-# Dataset visualziation with Facets and Streamlit
+# Dataset visualization with Facets and Streamlit
 
 Explore dataset visualization with [Google Facets](https://pair-code.github.io/facets/) and
 [Streamlit](https://www.streamlit.io/).
@@ -21,8 +21,11 @@ learning in mind. It has two visualization modes (quotes from its website):
   individual item in the visualization represents a data point. Position items by "faceting" or
   bucketing them in multiple dimensions by their feature values._
 
-Note the disclaimer that this is not a Google product. It developed and released as part of their
-work with the machine learning community.
+Note the disclaimer that this is not a Google product. It was developed and released as part of
+their work [PAIR (people + AI research)](https://pair.withgoogle.com/) with the machine learning
+community.
+
+See how to use Google Facets [in this file](./google-facets.md).
 
 ## Streamlit
 

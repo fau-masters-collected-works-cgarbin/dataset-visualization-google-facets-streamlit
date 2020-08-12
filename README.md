@@ -3,9 +3,20 @@
 Explore dataset visualization with [Google Facets](https://pair-code.github.io/facets/) and
 [Streamlit](https://www.streamlit.io/).
 
-We use these visualization tools to explore the
+We use these visualization tools to explore the characteristics of the patients in the
 [ChestX-ray8 (a.k.a. ChestX-ray14) dataset](https://arxiv.org/abs/1705.02315) available
-[here](https://nihcc.app.box.com/v/ChestXray-NIHCC).
+[here](https://nihcc.app.box.com/v/ChestXray-NIHCC):
+
+For this analysis we are interested in the characteristics of the patients, not the images. We want
+to understand the representativeness of the dataset across genres and ages. We will explore
+questions such as:
+
+- What is the overall genre distribution?
+- What is the distribution of diseases across the genres?
+- What is the distribution of diseases across the ages? Across age groups?
+- Is the disease distribution the same in the training and test sets?
+- Is the disease distribution the same across genres and ages in the training and test sets?
+- What diseases coccur in the same image?
 
 ## Google Facets
 
@@ -25,7 +36,7 @@ Note the disclaimer that this is not a Google product. It was developed and rele
 their work [PAIR (people + AI research)](https://pair.withgoogle.com/) with the machine learning
 community.
 
-See how to use Google Facets [in this file](./google-facets.md).
+See Google Facets is used to explore the dataset [in this file](./google-facets.md).
 
 ## Streamlit
 

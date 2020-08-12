@@ -56,3 +56,8 @@ See Google Facets is used to explore the dataset [in this file](./google-facets.
 ## Streamlit
 
 [Streamlit](https://www.streamlit.io/) is a general-purpose, interactive visualization framework.
+
+## Notes about coding
+
+- Uses [Google-style docstrings](https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings)
+  ([example](https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html)).

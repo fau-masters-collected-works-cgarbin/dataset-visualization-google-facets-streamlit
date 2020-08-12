@@ -4,7 +4,7 @@ We will explored the ChestX-ray8 (a.k.a. ChestX-ray14) dataset from the National
 Health. It is explained [in this paper](https://arxiv.org/abs/1705.02315) and stored
 [here](https://nihcc.app.box.com/v/ChestXray-NIHCC).
 
-The dataset is a collection of frontal x-ray images for patients of hte National Institutes of
+The dataset is a collection of frontal x-ray images for patients of the National Institutes of
 Health Clinical Center. A patient may have multiple images, taken over several visits to the center.
 Each image is annotated with the diseases the image may indicate. The diseases where extracted from
 the image reports with natural langugage processing (NLP).
@@ -24,8 +24,8 @@ The dataset has the following information for each patient:
 - Original image pixel spacing X: original image column spacing from DICOM.
 - Original image pixel spacing Y: original image row spacing from DICOM.
 
-In addition to that, it also has a documented split for trainig and test sets. Patients are either
-the training of the test set.
+In addition to that, it has a documented split for trainig and test sets. Patients are either in the
+training or the test set.
 
 ## Retrieving the dataset
 
@@ -38,7 +38,7 @@ version with this repository. See details of the local copy [here](./data/README
 The dataset needs to be preprocessed to be visualized:
 
 1. The diseases are stored in one column, separated by |. We will split them into separate columns.
-   Theere will be one column for each diseases, with true/false indicating presence/absence (i.e.
+   There will be one column for each diseases, with true/false indicating presence/absence (i.e.
    diseases will be _one-hot encoded_).
 1. It is useful to inspect age groups, but age is stored as full years. We will add a column to
    group age ranges (i.e. age will be _binned_).

@@ -8,16 +8,18 @@ See more details about the dataset in the data folder.
 '''
 import pandas as pd
 
+# Local copies of the dataset files
 _DATASET = 'data/Data_Entry_2017_v2020.csv'
 _TRAIN_VAL_LIST = 'data/train_val_list.txt'
 _TEST_LIST = 'data/test_list.txt'
 
+# Official dataset numbers and some often-used column names
 _NUM_IMAGES = 112120
 _NUM_PATIENTS = 30805
-
 _PATIENT_ID = 'Patient ID'
 _IMAGE_INDEX = 'Image Index'
 
+# Columns and values we add to the dataset
 _AGE_GROUP = 'Age Group'
 _TRAIN_TEST = 'Train/Test'
 _TRAIN = 'Train'

@@ -116,8 +116,9 @@ def get_dataset(from_cache: bool = True) -> pd.DataFrame:
     # Best reference I found for MeSH groups: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1794003/
     # We have only complete years, so we can't use 'newborn'
     # Adding the age range helps groups them together in visualizations
+    # Also prefix with zero because visualizers sort by ASCII code, not numeric value
     bins = [0, 2, 6, 13, 19, 45, 65, 80, 120]
-    ages = ['(0-1) Infant', '(2-5) Preschool', '(6-12) Child', '(13-18) Adolescent',
+    ages = ['(0-1) Infant', '(02-5) Preschool', '(06-12) Child', '(13-18) Adolescent',
             '(19-44) Adult', '(45-64) Middle age', '(65-79) Aged', '(80+) Aged 80']
     ds[_AGE_GROUP] = pd.cut(ds['Patient Age'], bins=bins, labels=ages, right=False)
 

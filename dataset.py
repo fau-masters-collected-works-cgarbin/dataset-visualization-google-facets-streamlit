@@ -1,4 +1,4 @@
-'''Preprocess the dataset
+'''Makes the ChestX-ray14 dataset more usable by augmenting it.
 
 - Separate the diseases into indicator (true/false) columns
 - Bin the ages into MeSH age groups

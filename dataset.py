@@ -29,6 +29,7 @@ _AGE_GROUP = 'Age Group'
 _TRAIN_TEST = 'Train/Test'
 _TRAIN = 'Train'
 _TEST = 'Test'
+_DISEASE_COLUM_PREFIX = 'D: '
 
 
 def _verify_dataset(ds: pd.DataFrame):
@@ -60,8 +61,8 @@ def _verify_dataset(ds: pd.DataFrame):
     assert _TRAIN_TEST in ds.columns
 
     # Sample some of the disease indicators
-    assert 'Mass' in ds.columns
-    assert 'No Finding' in ds.columns
+    assert _DISEASE_COLUM_PREFIX + 'Mass' in ds.columns
+    assert _DISEASE_COLUM_PREFIX + 'No Finding' in ds.columns
 
     # Check the train/test column contents (two labels, adding up to the total images)
     assert len(ds[_TRAIN_TEST].unique()) == 2
@@ -106,14 +107,18 @@ def get_dataset(from_cache: bool = True) -> pd.DataFrame:
     ds = pd.read_csv(_DATASET)
 
     # Split diseases into separate indicator columns
+    # Add a prefix to sort them together in visualizations
     indicators = ds['Finding Labels'].str.get_dummies('|')
+    indicators = indicators.add_prefix(_DISEASE_COLUM_PREFIX)
     ds = pd.concat([ds, indicators], axis='columns')
 
     # Bin the ages according to MeSH age groups
     # Best reference I found for MeSH groups: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1794003/
     # We have only complete years, so we can't use 'newborn'
+    # Adding the age range helps groups them together in visualizations
     bins = [0, 2, 6, 13, 19, 45, 65, 80, 120]
-    ages = ['Infant', 'Preschool', 'Child', 'Adolescent', 'Adult', 'Middle age', 'Aged', 'Aged 80']
+    ages = ['(0-1) Infant', '(2-5) Preschool', '(6-12) Child', '(13-18) Adolescent',
+            '(19-44) Adult', '(45-64) Middle age', '(65-79) Aged', '(80+) Aged 80']
     ds[_AGE_GROUP] = pd.cut(ds['Patient Age'], bins=bins, labels=ages, right=False)
 
     # Add train/test column for the images
@@ -137,7 +142,18 @@ def get_dataset(from_cache: bool = True) -> pd.DataFrame:
     return ds
 
 
+def reduce_size(ds: pd.DataFrame) -> pd.DataFrame:
+    '''Reduces the size of the dataframe by dropping some columns.
+
+    Some visualizers, most notably Google Facets in a Jupter Notebook, the amount of data in the
+    dataset makes the visualization sluggish. Reducing the size of the dataframe helps with
+    responsiveness (with the downside of fewer pieces of data, of course).
+    '''
+
+    return ds.drop([], axis='columns')
+
+
 # To allow standalone execution for tests
 if __name__ == "__main__":
-    dataset = get_dataset()
+    dataset = get_dataset(from_cache=False)
     print(dataset)

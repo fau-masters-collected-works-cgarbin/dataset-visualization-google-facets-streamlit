@@ -7,11 +7,16 @@
 See more details about the dataset in the data folder.
 '''
 import pandas as pd
+import os
 
 # Local copies of the dataset files
-_DATASET = 'data/Data_Entry_2017_v2020.csv'
-_TRAIN_VAL_LIST = 'data/train_val_list.txt'
-_TEST_LIST = 'data/test_list.txt'
+_DATA_DIR = 'data'
+_DATASET = os.path.join(_DATA_DIR, 'Data_Entry_2017_v2020.csv')
+_TRAIN_VAL_LIST = os.path.join(_DATA_DIR, 'train_val_list.txt')
+_TEST_LIST = os.path.join(_DATA_DIR, 'test_list.txt')
+
+# Cached preprocessed dataset
+_DATASET_CACHED = os.path.join(_DATA_DIR, 'chestx-ray14-preprocessed.csv')
 
 # Official dataset numbers and some often-used column names
 _NUM_IMAGES = 112120
@@ -32,7 +37,7 @@ def _verify_dataset(ds: pd.DataFrame):
     Verifies that the dataset has the content we expect. If any of these checks fail, either the
     dataset itself has changed or we made a mistake when preprocessing it.
 
-    If the dataset has changed, upddate the checks to match the new dataset.
+    If the dataset has changed, update the checks to match the new dataset.
 
     If the dataset has not changed, there may be a mistake in the preprocessig code.
 
@@ -50,13 +55,15 @@ def _verify_dataset(ds: pd.DataFrame):
     #    - 1 for the train/test label
     assert ds.shape[1] == 11 + 15 + 1 + 1
 
-    # Check if we added the new data as expected (check a few disease indicators and age group)
+    # Check if we added the new columns
     assert _AGE_GROUP in ds.columns
     assert _TRAIN_TEST in ds.columns
+
+    # Sample some of the disease indicators
     assert 'Mass' in ds.columns
     assert 'No Finding' in ds.columns
 
-    # Check the train/test split
+    # Check the train/test column contents (two labels, adding up to the total images)
     assert len(ds[_TRAIN_TEST].unique()) == 2
     assert (len(ds[ds[_TRAIN_TEST] == _TRAIN]) + len(ds[ds[_TRAIN_TEST] == _TEST])) == _NUM_IMAGES
 
@@ -72,13 +79,29 @@ def _verify_dataset(ds: pd.DataFrame):
     assert len(in_both) == 0
 
 
-def get_dataset() -> pd.DataFrame:
+def get_dataset(from_cache: bool = True) -> pd.DataFrame:
     '''Reads the raw files that comprise the dataset and creates a preprocessed dataset.
+
+    The preprocessed dataset is cached and available to be read from that cache later.
+
+    Args:
+        from_cache: load from the cached, preprocessed dataset, if available. Set to `False` to read
+            from the original dataset and run the preprocessing code again.
 
     Returns:
         The preprocessed dataset: diseases are split into indicator (true/false) columns, ages
         are binned, and images (and thus patients) are marked as "test" or "train".
     '''
+    if from_cache and os.path.isfile(_DATASET_CACHED):
+        ds = pd.read_csv(_DATASET_CACHED)
+        try:
+            _verify_dataset(ds)
+        except AssertionError:
+            # If we may have a bad cached file - rebuild it
+            # Rebuild may not fix it though - that indicates a bug in the code
+            os.remove(_DATASET_CACHED)
+            return get_dataset()
+        return ds
 
     ds = pd.read_csv(_DATASET)
 
@@ -109,6 +132,8 @@ def get_dataset() -> pd.DataFrame:
                                in train_set else _TEST, axis='columns')
 
     _verify_dataset(ds)
+
+    ds.to_csv(_DATASET_CACHED, index=False)
     return ds
 
 

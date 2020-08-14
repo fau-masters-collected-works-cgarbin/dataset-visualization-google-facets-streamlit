@@ -136,6 +136,11 @@ def get_dataset(from_cache: bool = True) -> pd.DataFrame:
     ds[_TRAIN_TEST] = ds.apply(lambda r: _TRAIN if r[_IMAGE_INDEX]
                                in train_set else _TEST, axis='columns')
 
+    # Rename some columns to fix the comma in their names
+    ds = ds.rename(columns={'OriginalImage[Width': 'Original Width', 'Height]': 'Original Height',
+                            'OriginalImagePixelSpacing[x': 'Original Spacing X',
+                            'y]': 'Original Spacing Y'})
+
     _verify_dataset(ds)
 
     ds.to_csv(_DATASET_CACHED, index=False)
@@ -150,10 +155,19 @@ def reduce_size(ds: pd.DataFrame) -> pd.DataFrame:
     responsiveness (with the downside of fewer pieces of data, of course).
     '''
 
-    return ds.drop([], axis='columns')
+    # Drop the disease indicators columns
+    indicators = [d for d in ds.columns if d.startswith(_DISEASE_COLUM_PREFIX)]
+    ds.drop(columns=indicators, inplace=True)
+
+    # Drop original size and pixel spacing
+    original = [d for d in ds.columns if d.startswith('Original')]
+    ds.drop(columns=original, inplace=True)
+
+    return ds
 
 
 # To allow standalone execution for tests
 if __name__ == "__main__":
-    dataset = get_dataset(from_cache=False)
+    dataset = get_dataset()
+    dataset = reduce_size(dataset)
     print(dataset)

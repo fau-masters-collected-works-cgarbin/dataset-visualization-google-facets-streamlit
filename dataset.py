@@ -25,7 +25,7 @@ _PATIENT_ID = 'Patient ID'
 _IMAGE_INDEX = 'Image Index'
 
 # Columns and values we add to the dataset
-_AGE_GROUP = 'Age Group'
+_AGE_GROUP = 'Patient Age Group'
 _TRAIN_TEST = 'Train/Test'
 _TRAIN = 'Train'
 _TEST = 'Test'
@@ -148,12 +148,16 @@ def get_dataset(from_cache: bool = True) -> pd.DataFrame:
     return ds
 
 
-def reduce_size(ds: pd.DataFrame) -> pd.DataFrame:
+def reduce_size(ds: pd.DataFrame, remove_indicators: bool = True) -> pd.DataFrame:
     '''Reduces the size of the dataframe by dropping some columns.
 
     Some visualizers, most notably Google Facets in a Jupter Notebook, the amount of data in the
     dataset makes the visualization sluggish. Reducing the size of the dataframe helps with
     responsiveness (with the downside of fewer pieces of data, of course).
+
+    Args:
+        ds: The dataset to be reduced.
+        remove_indicators: True to remove the disease indicator columns, of False to leave them in.
     '''
 
     # Drop the disease indicators columns

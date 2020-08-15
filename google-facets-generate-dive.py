@@ -2,8 +2,7 @@
 
 See the "Dive" section in https://pair-code.github.io/facets/.
 
-Based on https://colab.research.google.com/github/PAIR-code/facets/blob/master/colab_facets.ipynb#scrollTo=b7zs2p2_goJa, # noqa
-via https://github.com/PAIR-code/facets#setup.
+Based on https://github.com/PAIR-code/facets/blob/master/facets_dive/Dive_demo.ipynb.
 
 Note that the dataset is embedded in the HTML in JSON format. An improvement would be to embbed it
 in CSV format and convert to JSON when the page is loaded.

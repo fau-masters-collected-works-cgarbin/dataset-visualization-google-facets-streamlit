@@ -6,21 +6,16 @@ Based on https://github.com/PAIR-code/facets/blob/master/facets_overview/Overvie
 
 Note that the statistics are embedded in the HTML in BASE64 format.
 '''
-
 from facets_overview.generic_feature_statistics_generator import GenericFeatureStatisticsGenerator
 import base64
 
+# Works as long as it's not in a package  - https://stackoverflow.com/a/27876800
+import sys
+sys.path.append('..')
+from data import dataset  # noqa
+
 
 if __name__ == "__main__":
-    # To import when running as a file - https://stackoverflow.com/a/27876800
-    if __package__ is None:
-        import sys
-        from os import path
-        sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
-        from data import dataset
-    else:
-        from ..data import dataset
-
     ds = dataset.get_dataset()
     ds = dataset.reduce_size(ds, remove_indicators=False)
 

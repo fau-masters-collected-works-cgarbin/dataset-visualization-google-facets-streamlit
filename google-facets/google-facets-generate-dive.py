@@ -54,8 +54,13 @@ if __name__ == "__main__":
         ('"D: Atelectasis":0,"D: Cardiomegaly":0,"D: Consolidation":0,"D: Edema":0,"D: Effusion":1,"D: Emphysema":0,"D: Fibrosis":0,"D: Hernia":0,"D: Infiltration":0,"D: Mass":0,"D: No Finding":0,"D: Nodule":0,"D: Pleural_Thickening":0,"D: Pneumonia":0,"D: Pneumothorax":0',  # noqa
             '_EFF'),
 
+        # Fourth most common finding: atelectasis and no other finding
+        ('"D: Atelectasis":1,"D: Cardiomegaly":0,"D: Consolidation":0,"D: Edema":0,"D: Effusion":0,"D: Emphysema":0,"D: Fibrosis":0,"D: Hernia":0,"D: Infiltration":0,"D: Mass":0,"D: No Finding":0,"D: Nodule":0,"D: Pleural_Thickening":0,"D: Pneumonia":0,"D: Pneumothorax":0',  # noqa
+            '_ATE'),
+
         # Columns with well-defined values
         ('"Train\\/Test":"Train"},{', '_Tr'), (',"Train\\/Test":"Test"},{', '_Tt'),
+        ('"Patient Age Group":"(19-44) Adult"', '_AD'),
         ('"Patient Age Group":"(45-64) Middle age"', '_MA'),
         ('"Patient Age Group":"(65-79) Aged"', '_AG'),
 
@@ -66,9 +71,9 @@ if __name__ == "__main__":
         ('Pleural_Thickening', '_dd'), ('Pneumonia', '_de'), ('Pneumothorax', '_df'),
 
         # All other headers
-        ('Image Index', '_h1'), ('Finding Labels', '_h2'), ('Follow-up #', '_h3'),
-        ('Patient ID', '_h4'), ('Patient Age', '_h5'), ('Patient Gender', '_h6'),
-        ('View Position', '_h7'), ('Patient Age Group', '_h8'),
+        ('"Image Index":', '_h1'), ('"Finding Labels":', '_h2'), ('"Follow-up #":', '_h3'),
+        ('"Patient ID":', '_h4'), ('"Patient Age":', '_h5'), ('"Patient Gender":', '_h6'),
+        ('"View Position":', '_h7'), ('"Patient Age Group":', '_h8'),
     ]
 
     jsmap = ''

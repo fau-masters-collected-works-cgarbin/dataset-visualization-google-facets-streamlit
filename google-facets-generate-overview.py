@@ -7,7 +7,7 @@ Based on https://github.com/PAIR-code/facets/blob/master/facets_overview/Overvie
 Note that the statistics are embedded in the HTML in BASE64 format.
 '''
 
-import dataset
+import data.dataset as dataset
 from facets_overview.generic_feature_statistics_generator import GenericFeatureStatisticsGenerator
 import base64
 

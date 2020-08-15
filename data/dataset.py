@@ -9,8 +9,12 @@ See more details about the dataset in the data folder.
 import pandas as pd
 import os
 
+# To read from the local directory
+# This works as long as we don't make a real package out of this code
+# See https://importlib-resources.readthedocs.io/en/latest/using.html
+_DATA_DIR = os.path.dirname(__file__)
+
 # Local copies of the dataset files
-_DATA_DIR = 'data'
 _DATASET = os.path.join(_DATA_DIR, 'Data_Entry_2017_v2020.csv')
 _TRAIN_VAL_LIST = os.path.join(_DATA_DIR, 'train_val_list.txt')
 _TEST_LIST = os.path.join(_DATA_DIR, 'test_list.txt')
@@ -29,7 +33,7 @@ _AGE_GROUP = 'Patient Age Group'
 _TRAIN_TEST = 'Train/Test'
 _TRAIN = 'Train'
 _TEST = 'Test'
-_DISEASE_COLUM_PREFIX = 'D: '
+_DISEASE_COLUMN_PREFIX = 'D: '
 
 
 def _verify_dataset(ds: pd.DataFrame):
@@ -61,8 +65,8 @@ def _verify_dataset(ds: pd.DataFrame):
     assert _TRAIN_TEST in ds.columns
 
     # Sample some of the disease indicators
-    assert _DISEASE_COLUM_PREFIX + 'Mass' in ds.columns
-    assert _DISEASE_COLUM_PREFIX + 'No Finding' in ds.columns
+    assert _DISEASE_COLUMN_PREFIX + 'Mass' in ds.columns
+    assert _DISEASE_COLUMN_PREFIX + 'No Finding' in ds.columns
 
     # Check the train/test column contents (two labels, adding up to the total images)
     assert len(ds[_TRAIN_TEST].unique()) == 2
@@ -109,7 +113,7 @@ def get_dataset(from_cache: bool = True) -> pd.DataFrame:
     # Split diseases into separate indicator columns
     # Add a prefix to sort them together in visualizations
     indicators = ds['Finding Labels'].str.get_dummies('|')
-    indicators = indicators.add_prefix(_DISEASE_COLUM_PREFIX)
+    indicators = indicators.add_prefix(_DISEASE_COLUMN_PREFIX)
     ds = pd.concat([ds, indicators], axis='columns')
 
     # Bin the ages according to MeSH age groups
@@ -165,7 +169,7 @@ def reduce_size(ds: pd.DataFrame, remove_indicators: bool = True) -> pd.DataFram
 
     # Drop the disease indicators columns
     if remove_indicators:
-        indicators = [d for d in ds.columns if d.startswith(_DISEASE_COLUM_PREFIX)]
+        indicators = [d for d in ds.columns if d.startswith(_DISEASE_COLUMN_PREFIX)]
         ds.drop(columns=indicators, inplace=True)
 
     # Drop original size and pixel spacing

@@ -10,7 +10,7 @@ replace some of the most common substrings with a short version, as the code doe
 reduces the size from 54 MB to about 17 MB.
 '''
 
-import dataset
+import data.dataset as dataset
 
 
 def get_sprite_size(dataset_rows: int) -> int:

@@ -4,8 +4,7 @@ See the "Overview" section in https://pair-code.github.io/facets/.
 
 Based on https://github.com/PAIR-code/facets/blob/master/facets_overview/Overview_demo.ipynb.
 
-Note that the dataset is embedded in the HTML in JSON format. An improvement would be to embbed it
-in CSV format and convert to JSON when the page is loaded.
+Note that the statistics are embedded in the HTML in BASE64 format.
 '''
 
 import dataset

@@ -151,18 +151,22 @@ def get_dataset(from_cache: bool = True) -> pd.DataFrame:
 def reduce_size(ds: pd.DataFrame, remove_indicators: bool = True) -> pd.DataFrame:
     '''Reduces the size of the dataframe by dropping some columns.
 
-    Some visualizers, most notably Google Facets in a Jupter Notebook, the amount of data in the
+    Some visualizers, most notably Google Facets in a Jupter Notebook, a large amount of data in the
     dataset makes the visualization sluggish. Reducing the size of the dataframe helps with
     responsiveness (with the downside of fewer pieces of data, of course).
 
     Args:
         ds: The dataset to be reduced.
         remove_indicators: True to remove the disease indicator columns, of False to leave them in.
+
+    Returns:
+        A dataset with fewer columnns.
     '''
 
     # Drop the disease indicators columns
-    indicators = [d for d in ds.columns if d.startswith(_DISEASE_COLUM_PREFIX)]
-    ds.drop(columns=indicators, inplace=True)
+    if remove_indicators:
+        indicators = [d for d in ds.columns if d.startswith(_DISEASE_COLUM_PREFIX)]
+        ds.drop(columns=indicators, inplace=True)
 
     # Drop original size and pixel spacing
     original = [d for d in ds.columns if d.startswith('Original')]

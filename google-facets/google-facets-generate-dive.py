@@ -10,8 +10,6 @@ replace some of the most common substrings with a short version, as the code doe
 reduces the size from 54 MB to about 17 MB.
 '''
 
-import data.dataset as dataset
-
 
 def get_sprite_size(dataset_rows: int) -> int:
     '''Sets the sprite_size based on the number of records in dataset.
@@ -31,6 +29,15 @@ def get_sprite_size(dataset_rows: int) -> int:
 
 
 if __name__ == "__main__":
+    # To import when running as a file - https://stackoverflow.com/a/27876800
+    if __package__ is None:
+        import sys
+        from os import path
+        sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
+        from data import dataset
+    else:
+        from ..data import dataset
+
     ds = dataset.get_dataset()
     ds = dataset.reduce_size(ds, remove_indicators=False)
 

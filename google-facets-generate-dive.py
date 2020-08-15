@@ -11,21 +11,21 @@ in CSV format and convert to JSON when the page is loaded.
 import dataset
 
 
-def get_sprite_size(dataset_size):
+def get_sprite_size(dataset_rows: int) -> int:
     '''Sets the sprite_size based on the number of records in dataset.
 
-    Larger datasets can crash the browser if the size is too large (>50000)
+    Larger datasets can crash the browser if the size is too large (>50000).
 
     Args:
-        The size (number of entries) in the dataset.
+        dataset_rows: The number of rows in the dataset.
 
     Returns:
         The sprite size, adjusted for the dataset size.
     '''
-    if dataset_size > 100000:
+    if dataset_rows > 100000:
         return 16
     else:
-        return 32 if dataset_size > 50000 else 64
+        return 32 if dataset_rows > 50000 else 64
 
 
 if __name__ == "__main__":

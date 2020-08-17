@@ -1,11 +1,10 @@
 # Dataset visualization with Facets and Streamlit
 
-Explore dataset visualization with [Google Facets](https://pair-code.github.io/facets/) and
-[Streamlit](https://www.streamlit.io/).
+Explore dataset visualization with [Google Facets](#google-facets) and [Streamlit](#streamlit).
 
 We use these visualization tools to explore the characteristics of the patients in the
 [ChestX-ray8 (a.k.a. ChestX-ray14) dataset](https://arxiv.org/abs/1705.02315) available
-[here](https://nihcc.app.box.com/v/ChestXray-NIHCC):
+[here](https://nihcc.app.box.com/v/ChestXray-NIHCC).
 
 For this analysis we are interested in the characteristics of the patients, not the images. We want
 to understand the representativeness of the dataset across genres and ages. We will explore
@@ -20,8 +19,24 @@ questions such as:
 
 ## The quick how-to guide
 
-These are the quick instructions to run the visualization. The details are explained in each
-section.
+### If you want to see the visualizations
+
+Clone this repository, then:
+
+**Google Facets**:
+
+Note that Google Facets works only with Chrome.
+
+- Google Facets Dive: open Chrome, then choose _Open File..._ in the _File_ and open the file
+    `google-facets/google-facets-dive.html`.
+- Google Facets Overview: open Chrome, then choose _Open File..._ in the _File_ and open the file
+    `google-facets/google-facets-overview.html`.
+
+The dataset is fairly large. It may take several seconds to show the page.
+
+### If you want to change the code
+
+These are the quick instructions to woth with the code for the visualizations.
 
 - Install Python 3
 - Clone this repository
@@ -35,23 +50,7 @@ TODO: add steps for each visualization
 
 ## Google Facets
 
-[Google Facets](https://pair-code.github.io/facets/) was created to explore data with machine
-learning in mind. It has two visualization modes (quotes from its website):
-
-- [Overview](https://github.com/PAIR-code/facets#facets-overview): _quick understanding of the
-  distribution of values across the features of their dataset(s). Uncover several uncommon and
-  common issues such as unexpected feature values, missing feature values for a large number of
-  observation, training/serving skew and train/test/validation set skew._
-- [Dive](https://github.com/PAIR-code/facets#facets-dive): _an interactive interface for exploring
-  the relationship between data points across all of the different features of a dataset. Each
-  individual item in the visualization represents a data point. Position items by "faceting" or
-  bucketing them in multiple dimensions by their feature values._
-
-Note the disclaimer that this is not a Google product. It was developed and released as part of
-their work [PAIR (people + AI research)](https://pair.withgoogle.com/) with the machine learning
-community.
-
-See Google Facets is used to explore the dataset [in this file](./google-facets.md).
+See how Google Facets is used to explore the dataset [in this file](./google-facets/google-facets.md).
 
 ## Streamlit
 

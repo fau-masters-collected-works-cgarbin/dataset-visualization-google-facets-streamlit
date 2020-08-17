@@ -15,3 +15,5 @@ At the time this folder was created, the timestamp of the files in the NIH folde
 
 The folder also contains the code to preprocess the dataset and the cached copy of the
 preprocessed dataset.
+
+See more details about the dataset and the preprocessing [here](../dataset.md).

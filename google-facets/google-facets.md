@@ -1,4 +1,4 @@
-# Google facets
+# Google Facets
 
 If you haven't done so yet, review the details of [dataset we are using](../dataset.md).
 
@@ -31,3 +31,5 @@ To get this picture, we set the following parameters in the visualization:
 - Color By: Patient Gender
 
 ![Visualization parameters](./pics/chestx-ray8-visualization-parameters.png)
+
+[Quick guide to see the visualizations](../readme.md#the-quickhow-to-guide).

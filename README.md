@@ -20,7 +20,7 @@ questions such as:
 
 ## The quick how-to guide
 
-### If you want to see the visualizations
+### If you want to explore the visualizations
 
 Clone this repository, then:
 

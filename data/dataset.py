@@ -14,25 +14,29 @@ import os
 # See https://importlib-resources.readthedocs.io/en/latest/using.html
 _DATA_DIR = os.path.dirname(__file__)
 
-# Local copies of the dataset files
+# Local copies (files) of the dataset files
 _DATASET = os.path.join(_DATA_DIR, 'Data_Entry_2017_v2020.csv')
-_TRAIN_VAL_LIST = os.path.join(_DATA_DIR, 'train_val_list.txt')
+TRAIN_VAL_VAL_LIST = os.path.join(_DATA_DIR, 'train_val_list.txt')
 _TEST_LIST = os.path.join(_DATA_DIR, 'test_list.txt')
 
 # Cached preprocessed dataset
 _DATASET_CACHED = os.path.join(_DATA_DIR, 'chestx-ray14-preprocessed.csv')
 
-# Official dataset numbers and some often-used column names
+# Official dataset numbers
 _NUM_IMAGES = 112120
 _NUM_PATIENTS = 30805
-_PATIENT_ID = 'Patient ID'
-_IMAGE_INDEX = 'Image Index'
+
+# Some often-used column names
+PATIENT_ID_COL = 'Patient ID'
+PATIENT_GENDER_COL = 'Patient Gender'
+IMAGE_INDEX_COL = 'Image Index'
 
 # Columns and values we add to the dataset
-_AGE_GROUP = 'Patient Age Group'
-_TRAIN_TEST = 'Train/Test'
-_TRAIN = 'Train'
-_TEST = 'Test'
+PATIENT_AGE_GROUP_COL = 'Patient Age Group'
+TRAIN_TEST_COL = 'Train/Test'
+TRAIN_VAL = 'Train'
+TEST_VAL = 'Test'
+
 _DISEASE_COLUMN_PREFIX = 'D: '
 
 
@@ -52,7 +56,7 @@ def _verify_dataset(ds: pd.DataFrame):
 
     # Number of images and patients must match the original ChestX-ray14
     assert ds.shape[0] == _NUM_IMAGES
-    assert len(ds[_PATIENT_ID].unique()) == _NUM_PATIENTS
+    assert len(ds[PATIENT_ID_COL].unique()) == _NUM_PATIENTS
 
     # Number of columns must match the original 11, plus:
     #    - 15 for disease indicators (14 + 'no finding')
@@ -61,26 +65,27 @@ def _verify_dataset(ds: pd.DataFrame):
     assert ds.shape[1] == 11 + 15 + 1 + 1
 
     # Check if we added the new columns
-    assert _AGE_GROUP in ds.columns
-    assert _TRAIN_TEST in ds.columns
+    assert PATIENT_AGE_GROUP_COL in ds.columns
+    assert TRAIN_TEST_COL in ds.columns
 
     # Sample some of the disease indicators
     assert _DISEASE_COLUMN_PREFIX + 'Mass' in ds.columns
     assert _DISEASE_COLUMN_PREFIX + 'No Finding' in ds.columns
 
     # Check the train/test column contents (two labels, adding up to the total images)
-    assert len(ds[_TRAIN_TEST].unique()) == 2
-    assert (len(ds[ds[_TRAIN_TEST] == _TRAIN]) + len(ds[ds[_TRAIN_TEST] == _TEST])) == _NUM_IMAGES
+    assert len(ds[TRAIN_TEST_COL].unique()) == 2
+    assert (len(ds[ds[TRAIN_TEST_COL] == TRAIN_VAL]) +
+            len(ds[ds[TRAIN_TEST_COL] == TEST_VAL])) == _NUM_IMAGES
 
     # Patients must be either in the train or the test set
-    train_test_count = ds[[_PATIENT_ID, _IMAGE_INDEX, _TRAIN_TEST]
-                          ].groupby(['Patient ID', _TRAIN_TEST]).count().unstack()
+    train_test_count = ds[[PATIENT_ID_COL, IMAGE_INDEX_COL, TRAIN_TEST_COL]
+                          ].groupby(['Patient ID', TRAIN_TEST_COL]).count().unstack()
     train_test_count.columns = train_test_count.columns.droplevel()
     train_test_count.fillna(0, inplace=True)
 
     assert train_test_count.shape[0] == _NUM_PATIENTS
-    assert (train_test_count[_TRAIN].sum() + train_test_count[_TEST].sum()) == _NUM_IMAGES
-    in_both = train_test_count[(train_test_count[_TRAIN] > 0) & (train_test_count[_TEST] > 0)]
+    assert (train_test_count[TRAIN_VAL].sum() + train_test_count[TEST_VAL].sum()) == _NUM_IMAGES
+    in_both = train_test_count[(train_test_count[TRAIN_VAL] > 0) & (train_test_count[TEST_VAL] > 0)]
     assert len(in_both) == 0
 
 
@@ -124,10 +129,10 @@ def get_dataset(from_cache: bool = True) -> pd.DataFrame:
     bins = [0, 2, 6, 13, 19, 45, 65, 80, 120]
     ages = ['(0-1) Infant', '(02-5) Preschool', '(06-12) Child', '(13-18) Adolescent',
             '(19-44) Adult', '(45-64) Middle age', '(65-79) Aged', '(80+) Aged 80']
-    ds[_AGE_GROUP] = pd.cut(ds['Patient Age'], bins=bins, labels=ages, right=False)
+    ds[PATIENT_AGE_GROUP_COL] = pd.cut(ds['Patient Age'], bins=bins, labels=ages, right=False)
 
     # Add train/test column for the images
-    train = pd.read_csv(_TRAIN_VAL_LIST, header=None)
+    train = pd.read_csv(TRAIN_VAL_VAL_LIST, header=None)
     test = pd.read_csv(_TEST_LIST, header=None)
 
     # Use sets for faster membership test
@@ -138,8 +143,8 @@ def get_dataset(from_cache: bool = True) -> pd.DataFrame:
     assert (len(train_set) + len(test_set)) == _NUM_IMAGES
     assert len(train_set & test_set) == 0
 
-    ds[_TRAIN_TEST] = ds.apply(lambda r: _TRAIN if r[_IMAGE_INDEX]
-                               in train_set else _TEST, axis='columns')
+    ds[TRAIN_TEST_COL] = ds.apply(lambda r: TRAIN_VAL if r[IMAGE_INDEX_COL]
+                                  in train_set else TEST_VAL, axis='columns')
 
     # Rename some columns to fix the comma in their names
     ds = ds.rename(columns={'OriginalImage[Width': 'Original Width', 'Height]': 'Original Height',

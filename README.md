@@ -31,7 +31,7 @@ Note that Google Facets works only with Chrome.
 - Google Facets Overview: open Chrome, then choose _Open File..._ in the _File_ and open the file
     `google-facets/google-facets-overview.html`.
 
-### Streamlit visualziation quick guide
+### Streamlit visualization quick guide
 
 - Set up the environment as explained [here](#if-you-want-to-change-the-code).
 - `cd streamlit`

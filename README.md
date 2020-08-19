@@ -24,7 +24,7 @@ questions such as:
 
 Clone this repository, then:
 
-**Google Facets**:
+#### Google Facets visualization quick guide
 
 Note that Google Facets works only with Chrome.
 
@@ -33,11 +33,17 @@ Note that Google Facets works only with Chrome.
 - Google Facets Overview: open Chrome, then choose _Open File..._ in the _File_ and open the file
     `google-facets/google-facets-overview.html`.
 
+#### Streamlit visualziation quick guide
+
+- Set up the environment as explained [here](#if-you-want-to-change-the-code).
+- `cd streamlit`
+- `streamlit run streamlit-viz.py`
+
 The dataset is fairly large. It may take several seconds to show the page.
 
 ### If you want to change the code
 
-These are the quick instructions to woth with the code for the visualizations.
+These are the quick instructions to work with the code for the visualizations.
 
 - Install Python 3
 - Clone this repository

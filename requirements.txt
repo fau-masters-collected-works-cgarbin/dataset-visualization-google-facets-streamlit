@@ -4,3 +4,5 @@ pandas~=1.1
 # Pandas also installs NumPy - no need to specify it separately
 
 facets-overview
+streamlit~=0.65
+seaborn~=0.10

@@ -18,13 +18,11 @@ questions such as:
 - Is the disease distribution the same across genres and ages in the training and test sets?
 - What diseases coccur in the same image?
 
-## The quick how-to guide
-
-### If you want to explore the visualizations
+## If you want to explore the visualizations
 
 Clone this repository, then:
 
-#### Google Facets visualization quick guide
+### Google Facets visualization quick guide
 
 Note that Google Facets works only with Chrome.
 
@@ -33,7 +31,7 @@ Note that Google Facets works only with Chrome.
 - Google Facets Overview: open Chrome, then choose _Open File..._ in the _File_ and open the file
     `google-facets/google-facets-overview.html`.
 
-#### Streamlit visualziation quick guide
+### Streamlit visualziation quick guide
 
 - Set up the environment as explained [here](#if-you-want-to-change-the-code).
 - `cd streamlit`

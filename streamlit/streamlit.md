@@ -13,4 +13,4 @@ can select a specific disease and show it in percentages of the total images.
 
 ![Streamlit example](./pics/streamlit-example.png)
 
-[How to explore the visualizations](../README.md#the-quick-how-to-guide).
+[How to explore the visualizations](../README.md#if-you-want-to-explore-the-visualizations).

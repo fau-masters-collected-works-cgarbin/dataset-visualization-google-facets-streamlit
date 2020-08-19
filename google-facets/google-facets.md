@@ -34,4 +34,4 @@ To get this picture, we set the following parameters in the visualization:
 
 ![Visualization parameters](./pics/chestx-ray8-visualization-parameters.png)
 
-[How to explore the visualizations](../README.md#the-quick-how-to-guide).
+[How to explore the visualizations](../README.md#if-you-want-to-explore-the-visualizations).

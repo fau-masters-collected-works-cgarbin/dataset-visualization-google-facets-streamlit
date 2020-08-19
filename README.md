@@ -39,7 +39,7 @@ Note that Google Facets works only with Chrome.
 
 The dataset is fairly large. It may take several seconds to show the page.
 
-### If you want to change the code
+## If you want to change the code
 
 These are the quick instructions to work with the code for the visualizations.
 

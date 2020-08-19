@@ -51,8 +51,6 @@ These are the quick instructions to work with the code for the visualizations.
 - Activate the environmnet: `source env/bin/activate` (Linux/Mac) or `.\env\Scripts\activate` (Windows)
 - Install the Python packages: `pip install -r requirements.txt`
 
-TODO: add steps for each visualization
-
 ## Google Facets
 
 See how Google Facets is used to explore the dataset [in this file](./google-facets/google-facets.md).

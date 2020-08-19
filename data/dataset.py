@@ -23,8 +23,8 @@ _TEST_LIST = os.path.join(_DATA_DIR, 'test_list.txt')
 _DATASET_CACHED = os.path.join(_DATA_DIR, 'chestx-ray14-preprocessed.csv')
 
 # Official dataset numbers
-_NUM_IMAGES = 112120
-_NUM_PATIENTS = 30805
+NUM_IMAGES = 112120
+NUM_PATIENTS = 30805
 
 # Some often-used column names
 PATIENT_ID_COL = 'Patient ID'
@@ -37,7 +37,7 @@ TRAIN_TEST_COL = 'Train/Test'
 TRAIN_VAL = 'Train'
 TEST_VAL = 'Test'
 
-_DISEASE_COLUMN_PREFIX = 'D: '
+DISEASE_COLUMN_PREFIX = 'D: '
 
 
 def _verify_dataset(ds: pd.DataFrame):
@@ -55,8 +55,8 @@ def _verify_dataset(ds: pd.DataFrame):
     '''
 
     # Number of images and patients must match the original ChestX-ray14
-    assert ds.shape[0] == _NUM_IMAGES
-    assert len(ds[PATIENT_ID_COL].unique()) == _NUM_PATIENTS
+    assert ds.shape[0] == NUM_IMAGES
+    assert len(ds[PATIENT_ID_COL].unique()) == NUM_PATIENTS
 
     # Number of columns must match the original 11, plus:
     #    - 15 for disease indicators (14 + 'no finding')
@@ -69,13 +69,13 @@ def _verify_dataset(ds: pd.DataFrame):
     assert TRAIN_TEST_COL in ds.columns
 
     # Sample some of the disease indicators
-    assert _DISEASE_COLUMN_PREFIX + 'Mass' in ds.columns
-    assert _DISEASE_COLUMN_PREFIX + 'No Finding' in ds.columns
+    assert DISEASE_COLUMN_PREFIX + 'Mass' in ds.columns
+    assert DISEASE_COLUMN_PREFIX + 'No Finding' in ds.columns
 
     # Check the train/test column contents (two labels, adding up to the total images)
     assert len(ds[TRAIN_TEST_COL].unique()) == 2
     assert (len(ds[ds[TRAIN_TEST_COL] == TRAIN_VAL]) +
-            len(ds[ds[TRAIN_TEST_COL] == TEST_VAL])) == _NUM_IMAGES
+            len(ds[ds[TRAIN_TEST_COL] == TEST_VAL])) == NUM_IMAGES
 
     # Patients must be either in the train or the test set
     train_test_count = ds[[PATIENT_ID_COL, IMAGE_INDEX_COL, TRAIN_TEST_COL]
@@ -83,10 +83,18 @@ def _verify_dataset(ds: pd.DataFrame):
     train_test_count.columns = train_test_count.columns.droplevel()
     train_test_count.fillna(0, inplace=True)
 
-    assert train_test_count.shape[0] == _NUM_PATIENTS
-    assert (train_test_count[TRAIN_VAL].sum() + train_test_count[TEST_VAL].sum()) == _NUM_IMAGES
+    assert train_test_count.shape[0] == NUM_PATIENTS
+    assert (train_test_count[TRAIN_VAL].sum() + train_test_count[TEST_VAL].sum()) == NUM_IMAGES
     in_both = train_test_count[(train_test_count[TRAIN_VAL] > 0) & (train_test_count[TEST_VAL] > 0)]
     assert len(in_both) == 0
+
+
+def get_disease_names(ds: pd.DataFrame, remove_prefix: bool = False) -> list:
+    '''Returns the names of the columns that indicate diseases.'''
+    diseases = [d for d in ds.columns if d.startswith(DISEASE_COLUMN_PREFIX)]
+    if remove_prefix:
+        return [d.replace(DISEASE_COLUMN_PREFIX, '') for d in diseases]
+    return diseases
 
 
 def get_dataset(from_cache: bool = True) -> pd.DataFrame:
@@ -118,7 +126,7 @@ def get_dataset(from_cache: bool = True) -> pd.DataFrame:
     # Split diseases into separate indicator columns
     # Add a prefix to sort them together in visualizations
     indicators = ds['Finding Labels'].str.get_dummies('|')
-    indicators = indicators.add_prefix(_DISEASE_COLUMN_PREFIX)
+    indicators = indicators.add_prefix(DISEASE_COLUMN_PREFIX)
     ds = pd.concat([ds, indicators], axis='columns')
 
     # Bin the ages according to MeSH age groups
@@ -140,7 +148,7 @@ def get_dataset(from_cache: bool = True) -> pd.DataFrame:
     test_set = set(test[0])
 
     # Check that we have the correct number of train/test instances and no overlap
-    assert (len(train_set) + len(test_set)) == _NUM_IMAGES
+    assert (len(train_set) + len(test_set)) == NUM_IMAGES
     assert len(train_set & test_set) == 0
 
     ds[TRAIN_TEST_COL] = ds.apply(lambda r: TRAIN_VAL if r[IMAGE_INDEX_COL]
@@ -174,8 +182,7 @@ def reduce_size(ds: pd.DataFrame, remove_indicators: bool = True) -> pd.DataFram
 
     # Drop the disease indicators columns
     if remove_indicators:
-        indicators = [d for d in ds.columns if d.startswith(_DISEASE_COLUMN_PREFIX)]
-        ds.drop(columns=indicators, inplace=True)
+        ds.drop(columns=get_dataset(ds), inplace=True)
 
     # Drop original size and pixel spacing
     original = [d for d in ds.columns if d.startswith('Original')]

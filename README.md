@@ -53,8 +53,8 @@ These are the quick instructions to work with the code for the visualizations.
 
 ## Google Facets
 
-See how Google Facets is used to explore the dataset [in this file](./google-facets).
+See how Google Facets is used to explore the dataset [here](./google-facets).
 
 ## Streamlit
 
-See how Streamlit is used to explore the dataset [in this file](./streamlit).
+See how Streamlit is used to explore the dataset [here](./streamlit).

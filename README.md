@@ -1,7 +1,7 @@
 # Dataset visualization with Facets and Streamlit
 
-Explore dataset visualization with [Google Facets](./google-facets/google-facets.md) and
-[Streamlit](#streamlit).
+Explore dataset visualization with [Google Facets](./google-facets/README.md) and
+[Streamlit](./streamlit/README.md).
 
 We use these visualization tools to explore the characteristics of the patients in the
 [ChestX-ray8 (a.k.a. ChestX-ray14) dataset](https://arxiv.org/abs/1705.02315) available
@@ -53,8 +53,8 @@ These are the quick instructions to work with the code for the visualizations.
 
 ## Google Facets
 
-See how Google Facets is used to explore the dataset [in this file](./google-facets/google-facets.md).
+See how Google Facets is used to explore the dataset [in this file](./google-facets/README.md).
 
 ## Streamlit
 
-See how Streamlit is used to explore the dataset [in this file](./streamlit/streamlit.md).
+See how Streamlit is used to explore the dataset [in this file](./streamlit/README.md).

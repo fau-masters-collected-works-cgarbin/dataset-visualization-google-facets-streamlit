@@ -58,3 +58,23 @@ See how Google Facets is used to explore the dataset [here](./google-facets).
 ## Streamlit
 
 See how Streamlit is used to explore the dataset [here](./streamlit).
+
+## Which one should I use?
+
+The fundamental difference between them is that Google Facets does not require any coding.
+In fact, you can upload a dataset directly [on their site](https://pair-code.github.io/facets/).
+Look for the "load your data" button (note that, as it says in the button, you are uploading
+data to the Google site - think about privacy and intellectual property).
+
+Not requiring code is an advantage and disadvantage. It is fast to explore the data, as long
+as you do not need features beyond what Google Facets already has in place.
+
+Customization is Streamlit's strength. You can transform the data on the fly, add filters and
+visualizations not available in Google Facets. The cost is writing the code for that. Streamlit
+takes care of the user interface elements and updating the user interface, so you can concentrate
+on writing the code that filters the data and creates the visualizations.
+
+To summarize:
+
+- Google Facet is good for a quick inspection of the data.
+- Sreamlit is good for customized ways to explore the data.

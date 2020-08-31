@@ -1,6 +1,6 @@
 # Google Facets
 
-If you haven't done so yet, review the details of [dataset we are using](../dataset.md).
+If you haven't done so yet, review the details of the [dataset we are using](../dataset.md).
 
 [Google Facets](https://pair-code.github.io/facets/) was created to explore data with machine
 learning in mind. It requires no coding, just loading the dataset.

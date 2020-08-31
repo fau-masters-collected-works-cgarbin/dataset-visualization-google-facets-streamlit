@@ -63,8 +63,11 @@ See how Streamlit is used to explore the dataset [here](./streamlit).
 
 The fundamental difference between them is that Google Facets does not require any coding.
 In fact, you can upload a dataset directly [on their site](https://pair-code.github.io/facets/).
-Look for the "load your data" button (note that, as it says in the button, you are uploading
-data to the Google site - think about privacy and intellectual property).
+Look for the "load your data" button. Note that, as it says in the button, you are uploading
+data to the Google site - think about privacy and intellectual property. (Side note: it is
+possible to customize the data points to show an image - this requires some coding, as
+explained [here](https://github.com/PAIR-code/facets/blob/master/facets_dive/README.md#providing-sprites-for-dive-to-render),
+but it can be used without it).
 
 Not requiring code is an advantage and disadvantage. It is fast to explore the data, as long
 as you do not need features beyond what Google Facets already has in place.

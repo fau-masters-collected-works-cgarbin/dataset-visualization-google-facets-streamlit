@@ -1,6 +1,6 @@
 # Streamlit
 
-If you haven't done so yet, review the details of [dataset we are using](../dataset.md).
+If you haven't done so yet, review the details of the [dataset we are using](../dataset.md).
 
 [Streamlit](https://www.streamlit.io/) does more than visualization. It can also run models. We will
 concentrate on the visualization part here.

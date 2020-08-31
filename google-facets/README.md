@@ -14,7 +14,10 @@ It has two visualization modes (quotes from its website):
 - [Dive](https://github.com/PAIR-code/facets#facets-dive): _an interactive interface for exploring
   the relationship between data points across all of the different features of a dataset. Each
   individual item in the visualization represents a data point. Position items by "faceting" or
-  bucketing them in multiple dimensions by their feature values._
+  bucketing them in multiple dimensions by their feature values._ It also allows the customization
+  of the images it shows for each datapoint, as explained
+  [here](https://github.com/PAIR-code/facets/blob/master/facets_dive/README.md#providing-sprites-for-dive-to-render).
+  It is not mandatory to use custom images.
 
 Note the disclaimer that this is not a Google product. It was developed and released as part of
 their work [PAIR (people + AI research)](https://pair.withgoogle.com/) with the machine learning

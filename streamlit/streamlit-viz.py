@@ -1,4 +1,6 @@
 '''Visualizes the ChestX-ray14 dataset with Streamlit (https://www.streamlit.io/).
+
+Run with: streamlit run streamlit-viz.py
 '''
 import streamlit as st
 import seaborn as sns

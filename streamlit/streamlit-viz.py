@@ -55,7 +55,7 @@ def plot_graph(df, row, col, hue):
         for ax in g.axes.flat:
             ax.yaxis.set_major_formatter(mtick.PercentFormatter())
     sns.despine(left=True)
-    st.pyplot()
+    st.pyplot(g.figure)
 
 
 df_agg_disease = get_aggregated_data(disease)

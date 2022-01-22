@@ -1,8 +1,8 @@
 # Specify versions with ~= to allow security fixes
 
-pandas~=1.1
+pandas~=1.3
 # Pandas also installs NumPy - no need to specify it separately
 
 facets-overview
-streamlit~=0.65
-seaborn~=0.10
+streamlit~=1.4
+seaborn~=0.11
